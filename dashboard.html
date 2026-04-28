@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | SmartChain AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="sidebar-container" data-active="dashboard"></div>
+
+    <main class="main-content">
+        <div id="header-container" data-title="Global Control Tower"></div>
+
+        <div class="dashboard-grid">
+            <div class="kpi-card glass animate-fade-in">
+                <span class="label">Total Shipments</span>
+                <span class="value">1,284</span>
+                <span class="trend up"><i class="fas fa-caret-up"></i> 12.5%</span>
+            </div>
+            <div class="kpi-card glass animate-fade-in" style="animation-delay: 0.1s;">
+                <span class="label">On-Time Delivery</span>
+                <span class="value">94.2%</span>
+                <span class="trend up"><i class="fas fa-caret-up"></i> 2.1%</span>
+            </div>
+            <div class="kpi-card glass animate-fade-in" style="animation-delay: 0.2s;">
+                <span class="label">Active Disruptions</span>
+                <span class="value">3</span>
+                <span class="trend down"><i class="fas fa-caret-down"></i> 1 shipment</span>
+            </div>
+            <div class="kpi-card glass animate-fade-in" style="animation-delay: 0.3s;">
+                <span class="label">Inventory Health</span>
+                <span class="value">88.5%</span>
+                <span class="trend up"><i class="fas fa-caret-up"></i> 5.3%</span>
+            </div>
+        </div>
+
+        <div class="sections-grid">
+            <div class="section-box glass animate-fade-in" style="animation-delay: 0.4s;">
+                <h3>
+                    <span>Demand Forecast vs Actual</span>
+                    <i class="fas fa-chart-line" style="color: var(--accent-blue);"></i>
+                </h3>
+                <canvas id="chart"></canvas>
+            </div>
+            <div class="section-box glass animate-fade-in" style="animation-delay: 0.5s;">
+                <h3>
+                    <span>AI Insights</span>
+                    <i class="fas fa-brain" style="color: var(--accent-purple);"></i>
+                </h3>
+                <div class="chat-container">
+                    <div class="chat-messages" id="chat">
+                        <div class="message ai">Welcome, Manager. I've analyzed your current routes. Weather patterns in the North might cause a 4-hour delay for Shipment #842. Recommended: Reroute via Route B.</div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="userInput" placeholder="Ask AI for optimization...">
+                        <button onclick="getAI()"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-box glass animate-fade-in" style="margin-top: 1.5rem; height: 500px; animation-delay: 0.6s;">
+            <h3>
+                <span>Real-time Transit Map</span>
+                <i class="fas fa-map-marked-alt" style="color: var(--success);"></i>
+            </h3>
+            <div id="map-container">
+                <div id="map" style="height: 100%;"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="components.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
