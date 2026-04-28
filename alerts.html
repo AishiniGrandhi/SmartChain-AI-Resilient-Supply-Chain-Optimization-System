@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alert Center | SmartChain AI</title>
+    <title>Alert Center | Universal Control Tower</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -12,7 +12,7 @@
     <div id="sidebar-container" data-active="alerts"></div>
 
     <main class="main-content">
-        <div id="header-container" data-title="System Alert Center"></div>
+        <div id="header-container"></div>
 
         <div class="section-box glass animate-fade-in">
             <h3>Active System Alerts</h3>
@@ -72,6 +72,33 @@
         </div>
     </main>
 
+    <!-- Floating AI Assistant -->
+    <div class="ai-fab" onclick="toggleAI()">
+        <i class="fas fa-robot"></i>
+    </div>
+    
+    <div class="glass ai-panel" id="ai-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <h3>Strategic Hub</h3>
+            <i class="fas fa-times" onclick="toggleAI()" style="cursor: pointer;"></i>
+        </div>
+        <div class="chat-container">
+            <div class="chat-messages" id="chat">
+                <div class="message ai">Strategic Hub Online. How can I help?</div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="userInput" placeholder="Ask AI...">
+                <button onclick="getAI()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="loading-overlay" id="loading-overlay">
+        <span class="loader"></span>
+        <span class="loading-text" id="loading-text">Processing Operational Alerts...</span>
+    </div>
+
+    <script src="data.js"></script>
     <script src="components.js"></script>
     <script src="script.js"></script>
 </body>

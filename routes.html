@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Route Optimizer | SmartChain AI</title>
+    <title>Network Optimizer | Universal Control Tower</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="style.css">
@@ -13,56 +13,67 @@
     <div id="sidebar-container" data-active="routes"></div>
 
     <main class="main-content">
-        <div id="header-container" data-title="Route Optimizer"></div>
+        <div id="header-container"></div>
 
         <div class="sections-grid">
-            <div class="section-box glass animate-fade-in" style="height: 600px;">
+            <div class="section-box glass animate-fade-in" style="height: 650px;">
                 <h3>
-                    <span>Dynamic Network Map</span>
+                    <span>Interactive Network Topology</span>
                     <i class="fas fa-satellite" style="color: var(--accent-blue);"></i>
                 </h3>
                 <div id="map-container">
                     <div id="map" style="height: 100%;"></div>
                 </div>
             </div>
-            <div class="section-box glass animate-fade-in" style="height: 600px; animation-delay: 0.2s;">
+            <div class="section-box glass animate-fade-in" style="height: 650px; animation-delay: 0.2s;">
                 <h3>
-                    <span>Optimization Engine</span>
+                    <span>Dynamic Optimizer</span>
                     <i class="fas fa-microchip" style="color: var(--accent-purple);"></i>
                 </h3>
                 
-                <div style="margin-bottom: 2rem;">
-                    <h4 style="color: var(--text-secondary); margin-bottom: 1rem;">Active Shipments</h4>
-                    <div class="glass" style="padding: 1rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-blue);">
-                        <p style="font-weight: 600;">Shipment #TX-442</p>
-                        <p style="font-size: 0.8rem; color: var(--text-secondary);">Dallas → Chicago</p>
-                        <div style="margin-top: 0.5rem; display: flex; justify-content: space-between; align-items: center;">
-                            <span style="font-size: 0.75rem; background: rgba(56,189,248,0.1); color: var(--accent-blue); padding: 2px 8px; border-radius: 4px;">ON TIME</span>
-                            <span style="font-size: 0.75rem; color: var(--text-secondary);">420 km left</span>
-                        </div>
-                    </div>
-                    <div class="glass" style="padding: 1rem; margin-bottom: 1rem; border-left: 4px solid var(--warning);">
-                        <p style="font-weight: 600;">Shipment #NY-118</p>
-                        <p style="font-size: 0.8rem; color: var(--text-secondary);">New York → Berlin</p>
-                        <div style="margin-top: 0.5rem; display: flex; justify-content: space-between; align-items: center;">
-                            <span style="font-size: 0.75rem; background: rgba(250,204,21,0.1); color: var(--warning); padding: 2px 8px; border-radius: 4px;">WEATHER DELAY</span>
-                            <span style="font-size: 0.75rem; color: var(--text-secondary);">In Transit</span>
-                        </div>
-                    </div>
+                <div id="route-list-container" style="overflow-y: auto; height: 350px; margin-bottom: 2rem;">
+                    <!-- Routes injected by JS -->
                 </div>
 
-                <div style="margin-top: 2rem;">
-                    <h4 style="color: var(--text-secondary); margin-bottom: 1rem;">AI Rerouting Suggestions</h4>
-                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
-                        Detected congestion on Route A-12. Rerouting via Highway 45 could save 22 mins and 14L of fuel.
+                <div style="margin-top: 1rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+                    <h4 style="color: var(--text-secondary); margin-bottom: 1rem;">AI Decision Feedback</h4>
+                    <p id="opt-status" style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
+                        Select a network asset to begin optimization analysis.
                     </p>
-                    <button class="cta-button glow-blue" style="width: 100%; padding: 0.75rem;">Apply Optimization</button>
+                    <button class="cta-button glow-blue" style="width: 100%; padding: 0.75rem;" onclick="simulateOptimization()">Apply Strategic Reroute</button>
                 </div>
             </div>
         </div>
     </main>
 
+    <!-- Floating AI Assistant -->
+    <div class="ai-fab" onclick="toggleAI()">
+        <i class="fas fa-robot"></i>
+    </div>
+    
+    <div class="glass ai-panel" id="ai-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <h3>Strategic Hub</h3>
+            <i class="fas fa-times" onclick="toggleAI()" style="cursor: pointer;"></i>
+        </div>
+        <div class="chat-container">
+            <div class="chat-messages" id="chat">
+                <div class="message ai">Strategic Hub Online. How can I help?</div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="userInput" placeholder="Ask AI...">
+                <button onclick="getAI()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="loading-overlay" id="loading-overlay">
+        <span class="loader"></span>
+        <span class="loading-text" id="loading-text">Calculating Optimal Vectors...</span>
+    </div>
+
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="data.js"></script>
     <script src="components.js"></script>
     <script src="script.js"></script>
 </body>

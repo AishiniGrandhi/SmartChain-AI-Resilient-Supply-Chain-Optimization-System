@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventory | SmartChain AI</title>
+    <title>Assets | Universal Control Tower</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -12,86 +12,65 @@
     <div id="sidebar-container" data-active="inventory"></div>
 
     <main class="main-content">
-        <div id="header-container" data-title="Inventory Management"></div>
+        <div id="header-container"></div>
 
         <div class="section-box glass animate-fade-in">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-                <h3>Stock Overview</h3>
+                <h3 id="inventory-title">Active Assets</h3>
                 <div style="display: flex; gap: 1rem;">
-                    <input type="text" placeholder="Search inventory..." style="background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 0.5rem 1rem; border-radius: 8px; color: white;">
-                    <button class="cta-button" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">+ Add Item</button>
+                    <input type="text" id="assetSearch" placeholder="Search operations..." oninput="handleSearch()" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 0.5rem 1rem; border-radius: 8px; color: white;">
+                    <button class="cta-button" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;" onclick="openAddModal()">+ Add Asset</button>
                 </div>
             </div>
 
             <table class="data-table">
                 <thead>
                     <tr>
-                        <th>Item ID</th>
+                        <th>Asset ID</th>
                         <th>Name</th>
                         <th>Location</th>
-                        <th>Stock Level</th>
+                        <th>Capacity/Level</th>
                         <th>Status</th>
-                        <th>Last Updated</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>#INV-9021</td>
-                        <td>Precision Sensors</td>
-                        <td>Warehouse A (Dallas)</td>
-                        <td>450 units</td>
-                        <td><span style="color: var(--success);">● Optimum</span></td>
-                        <td>2 hours ago</td>
-                    </tr>
-                    <tr>
-                        <td>#INV-8842</td>
-                        <td>Micro-Processors</td>
-                        <td>Warehouse B (Singapore)</td>
-                        <td>120 units</td>
-                        <td><span style="color: var(--warning);">● Low Stock</span></td>
-                        <td>4 hours ago</td>
-                    </tr>
-                    <tr>
-                        <td>#INV-7731</td>
-                        <td>Lithium Cells</td>
-                        <td>Warehouse C (Berlin)</td>
-                        <td>2,400 units</td>
-                        <td><span style="color: var(--success);">● Optimum</span></td>
-                        <td>1 day ago</td>
-                    </tr>
-                    <tr>
-                        <td>#INV-6612</td>
-                        <td>Thermal Paste</td>
-                        <td>Warehouse A (Dallas)</td>
-                        <td>15 units</td>
-                        <td><span style="color: var(--danger);">● Critical</span></td>
-                        <td>12 mins ago</td>
-                    </tr>
+                <tbody id="asset-table-body">
+                    <!-- Rows injected by JS -->
                 </tbody>
             </table>
         </div>
-
-        <div class="sections-grid" style="margin-top: 1.5rem;">
-             <div class="section-box glass animate-fade-in" style="height: auto;">
-                <h3>AI Inventory Insights</h3>
-                <div style="padding: 1rem; background: rgba(56, 189, 248, 0.05); border-left: 4px solid var(--accent-blue); border-radius: 4px; margin-bottom: 1rem;">
-                    <p style="font-weight: 600; color: var(--accent-blue);">Critical Stock Alert: Thermal Paste</p>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary);">Stock in Dallas warehouse has dropped below safety margin (20 units). Current consumption trends suggest depletion in 48 hours.</p>
-                </div>
-                <div style="padding: 1rem; background: rgba(129, 140, 248, 0.05); border-left: 4px solid var(--accent-purple); border-radius: 4px;">
-                    <p style="font-weight: 600; color: var(--accent-purple);">Replenishment Optimization</p>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary);">Suggested order of 500 units for Micro-Processors to capitalize on volume discounts available until Friday.</p>
-                </div>
-             </div>
-             <div class="section-box glass animate-fade-in" style="height: auto;">
-                <h3>Predictive Demand</h3>
-                <canvas id="inventory-chart" style="max-height: 200px;"></canvas>
-             </div>
-        </div>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Floating AI Assistant -->
+    <div class="ai-fab" onclick="toggleAI()">
+        <i class="fas fa-robot"></i>
+    </div>
+    
+    <div class="glass ai-panel" id="ai-panel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <h3>Strategic Hub</h3>
+            <i class="fas fa-times" onclick="toggleAI()" style="cursor: pointer;"></i>
+        </div>
+        <div class="chat-container">
+            <div class="chat-messages" id="chat">
+                <div class="message ai">Strategic Hub Online. How can I help?</div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="userInput" placeholder="Ask AI...">
+                <button onclick="getAI()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-overlay"></div>
+
+    <div class="loading-overlay" id="loading-overlay">
+        <span class="loader"></span>
+        <span class="loading-text" id="loading-text">Processing Operational Data...</span>
+    </div>
+
+    <script src="data.js"></script>
     <script src="components.js"></script>
     <script src="script.js"></script>
 </body>
-</html>
+</html>
