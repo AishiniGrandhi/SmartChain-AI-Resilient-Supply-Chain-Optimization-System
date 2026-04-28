@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,21 +14,25 @@
             justify-content: center;
             align-items: center;
             background: radial-gradient(circle at top right, rgba(56, 189, 248, 0.15), transparent 40%),
-                        radial-gradient(circle at bottom left, rgba(129, 140, 248, 0.15), transparent 40%);
+                radial-gradient(circle at bottom left, rgba(129, 140, 248, 0.15), transparent 40%);
         }
+
         .login-box {
             width: 400px;
             padding: 3rem;
             text-align: center;
         }
+
         .login-box h2 {
             margin-bottom: 2rem;
             font-size: 2rem;
         }
+
         .input-group {
             margin-bottom: 1.5rem;
             text-align: left;
         }
+
         .input-group label {
             display: block;
             font-size: 0.85rem;
@@ -35,7 +40,9 @@
             margin-bottom: 0.5rem;
             font-weight: 500;
         }
-        .input-group input, .input-group select {
+
+        .input-group input,
+        .input-group select {
             width: 100%;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border);
@@ -46,20 +53,25 @@
             transition: var(--transition);
             font-family: 'Inter', sans-serif;
         }
-        .input-group input:focus, .input-group select:focus {
+
+        .input-group input:focus,
+        .input-group select:focus {
             border-color: var(--accent-blue);
             background: rgba(255, 255, 255, 0.08);
             box-shadow: 0 0 15px rgba(56, 189, 248, 0.15);
         }
+
         .login-button {
             width: 100%;
             margin-top: 1rem;
         }
+
         #role-step {
             display: none;
         }
     </style>
 </head>
+
 <body>
 
     <div class="login-container">
@@ -77,13 +89,14 @@
                 <label>Password</label>
                 <input type="password" id="password" placeholder="••••••••" value="password">
             </div>
-            <button class="cta-button login-button" onclick="nextStep()">Continue <i class="fas fa-arrow-right"></i></button>
+            <button class="cta-button login-button" onclick="nextStep()">Continue <i
+                    class="fas fa-arrow-right"></i></button>
         </div>
 
         <div class="glass login-box animate-fade-in" id="role-step">
             <h2>Configure Session</h2>
             <p style="color: var(--text-secondary); margin-bottom: 2rem;">Select your operational domain and role.</p>
-            
+
             <div class="input-group">
                 <label>Operational Domain</label>
                 <select id="domain">
@@ -105,8 +118,10 @@
                 </select>
             </div>
 
-            <button class="cta-button login-button" onclick="finishLogin()">Launch Control Tower <i class="fas fa-rocket"></i></button>
-            <p style="margin-top: 1.5rem; font-size: 0.8rem; color: var(--text-secondary); cursor: pointer;" onclick="prevStep()">Back to credentials</p>
+            <button class="cta-button login-button" onclick="finishLogin()">Launch Control Tower <i
+                    class="fas fa-rocket"></i></button>
+            <p style="margin-top: 1.5rem; font-size: 0.8rem; color: var(--text-secondary); cursor: pointer;"
+                onclick="prevStep()">Back to credentials</p>
         </div>
     </div>
 
@@ -124,13 +139,14 @@
         function finishLogin() {
             const domain = document.getElementById('domain').value;
             const role = document.getElementById('role').value;
-            
+
             localStorage.setItem('sc_domain', domain);
             localStorage.setItem('sc_role', role);
             localStorage.setItem('sc_authenticated', 'true');
-            
+
             window.location.href = 'dashboard.html';
         }
     </script>
 </body>
+
 </html>

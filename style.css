@@ -163,7 +163,7 @@ header {
     border-radius: 50px;
     border: none;
     background: var(--accent-blue);
-    color: var(--bg-dark);
+    color: white;
     cursor: pointer;
     transition: var(--transition);
 }
@@ -248,7 +248,7 @@ header {
 .message.user {
     align-self: flex-end;
     background: var(--accent-blue);
-    color: var(--bg-dark);
+    color: white;
     margin-left: auto;
 }
 
@@ -325,7 +325,7 @@ header {
     height: 60px;
     border-radius: 50%;
     background: var(--accent-blue);
-    color: var(--bg-dark);
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;

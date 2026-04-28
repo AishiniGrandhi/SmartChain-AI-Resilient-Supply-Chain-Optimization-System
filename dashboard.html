@@ -14,7 +14,7 @@
 
     <main class="main-content">
         <div id="header-container"></div>
-
+        
         <div class="dashboard-grid" id="kpi-container">
             <!-- KPIs injected by JS -->
         </div>
@@ -25,8 +25,11 @@
                     <span>Operational Performance</span>
                     <i class="fas fa-chart-line" style="color: var(--accent-blue);"></i>
                 </h3>
-                <canvas id="chart"></canvas>
+                <div style="height: calc(100% - 60px);">
+                    <canvas id="chart"></canvas>
+                </div>
             </div>
+
             <div class="section-box glass animate-fade-in" style="animation-delay: 0.2s;">
                 <h3>
                     <span>Active Network Status</span>
@@ -37,54 +40,38 @@
                 </div>
             </div>
         </div>
-
-        <div class="section-box glass animate-fade-in" style="margin-top: 1.5rem; height: 500px; animation-delay: 0.3s;">
-            <h3>
-                <span>Real-time Operations Map</span>
-                <i class="fas fa-map-marked-alt" style="color: var(--success);"></i>
-            </h3>
-            <div id="map-container">
-                <div id="map" style="height: 100%;"></div>
-            </div>
-        </div>
     </main>
 
-    <!-- Floating AI Assistant -->
-    <div class="ai-fab" onclick="toggleAI()">
+    <div class="ai-fab shadow-glow" onclick="toggleAI()">
         <i class="fas fa-robot"></i>
     </div>
-    
-    <div class="glass ai-panel" id="ai-panel">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-            <h3>Strategic Hub</h3>
-            <i class="fas fa-times" onclick="toggleAI()" style="cursor: pointer;"></i>
+
+    <div class="ai-panel glass" id="ai-panel">
+        <div class="ai-header">
+            <div style="display:flex; align-items:center; gap:0.75rem;">
+                <div class="pulse-dot"></div>
+                <strong>AI Strategic Assistant</strong>
+            </div>
+            <i class="fas fa-times" onclick="toggleAI()" style="cursor:pointer;"></i>
         </div>
-        <div class="chat-container">
-            <div class="chat-messages" id="chat">
-                <div class="message ai">Strategic Hub Online. Systems nominal. How can I optimize operations today?</div>
-            </div>
-            <div class="suggested-prompts" id="suggested-prompts">
-                <!-- Prompts injected by JS -->
-            </div>
-            <div class="chat-input">
-                <input type="text" id="userInput" placeholder="Ask AI for optimization...">
-                <button onclick="getAI()"><i class="fas fa-paper-plane"></i></button>
-            </div>
+        <div class="ai-chat" id="chat">
+            <div class="message ai">System initialized. How can I assist with your operational strategy today?</div>
+        </div>
+        <div id="suggested-prompts" style="padding: 0 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem;"></div>
+        <div class="ai-input">
+            <input type="text" id="userInput" placeholder="Ask about network status..." onkeypress="if(event.key==='Enter') getAI()">
+            <button onclick="getAI()"><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
 
-    <!-- Modal for adding items -->
-    <div class="modal-overlay" id="modal-overlay">
-        <!-- Modal content injected by JS -->
-    </div>
-
-    <div class="loading-overlay" id="loading-overlay">
-        <span class="loader"></span>
-        <span class="loading-text" id="loading-text">Synchronizing Global Data...</span>
+    <div id="modal-overlay" class="modal-overlay"></div>
+    <div class="toast-container"></div>
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loader"></div>
+        <div class="loading-text" id="loading-text">Processing...</div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="data.js"></script>
     <script src="components.js"></script>
     <script src="script.js"></script>

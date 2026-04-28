@@ -15,30 +15,55 @@
         <div id="header-container"></div>
 
         <div class="section-box glass animate-fade-in">
-            <h3>Active System Alerts</h3>
-            <div style="margin-top: 2rem;">
-                <div class="glass" style="padding: 1.5rem; margin-bottom: 1rem; border-left: 6px solid var(--danger); display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <h3>Active System Alerts</h3>
+                <div class="glass" style="padding: 0.5rem 1rem; font-size: 0.8rem; display: flex; gap: 1rem;">
+                    <span style="color: var(--danger);">● 2 Critical</span>
+                    <span style="color: var(--warning);">● 5 Warning</span>
+                </div>
+            </div>
+
+            <div style="margin-top: 1rem;">
+                <!-- Critical Alert -->
+                <div class="glass" style="padding: 1.5rem; margin-bottom: 1.5rem; border-left: 6px solid var(--danger); display: flex; justify-content: space-between; align-items: center; background: rgba(239, 68, 68, 0.02);">
                     <div>
-                        <h4 style="color: var(--danger); margin-bottom: 0.5rem;">CRITICAL: Stock Depletion</h4>
-                        <p style="font-size: 0.9rem; color: var(--text-secondary);">Warehouse A (Dallas) - Item #INV-6612 is below critical margin (15 units remaining).</p>
+                        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+                            <span class="status-pill" style="background: rgba(239, 68, 68, 0.1); color: var(--danger); font-weight: 700;">CRITICAL</span>
+                            <h4 style="color: var(--text-primary); margin: 0;">Stock Depletion - Warehouse Dallas</h4>
+                        </div>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary);">Item #INV-6612 is below critical margin (15 units). Estimated stockout in 4h.</p>
                     </div>
-                    <button class="cta-button" style="background: var(--danger); color: white; padding: 0.5rem 1rem; font-size: 0.8rem;">REPLENISH NOW</button>
+                    <div style="display: flex; gap: 1rem;">
+                        <button class="cta-button" style="background: var(--danger); color: white; padding: 0.65rem 1.25rem; font-size: 0.8rem; border: none;" onclick="showToast('Replenishment order #7712 dispatched.', 'success')">REPLENISH NOW</button>
+                        <button class="cta-button" style="background: transparent; border: 1px solid var(--border); padding: 0.65rem 1.25rem; font-size: 0.8rem;">CONTACT HUB</button>
+                    </div>
                 </div>
 
-                <div class="glass" style="padding: 1.5rem; margin-bottom: 1rem; border-left: 6px solid var(--warning); display: flex; justify-content: space-between; align-items: center;">
+                <!-- Warning Alert -->
+                <div class="glass" style="padding: 1.5rem; margin-bottom: 1.5rem; border-left: 6px solid var(--warning); display: flex; justify-content: space-between; align-items: center; background: rgba(250, 204, 21, 0.02);">
                     <div>
-                        <h4 style="color: var(--warning); margin-bottom: 0.5rem;">WARNING: Route Disruption</h4>
-                        <p style="font-size: 0.9rem; color: var(--text-secondary);">Severe weather patterns detected in the Atlantic. Shipment #NY-118 expected to be delayed by 24h.</p>
+                        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+                            <span class="status-pill" style="background: rgba(250, 204, 21, 0.1); color: var(--warning); font-weight: 700;">WARNING</span>
+                            <h4 style="color: var(--text-primary); margin: 0;">Route Disruption - Atlantic Sector</h4>
+                        </div>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary);">Severe weather patterns detected. Shipment #NY-118 expected delay: 24h.</p>
                     </div>
-                    <button class="cta-button" style="background: var(--warning); color: black; padding: 0.5rem 1rem; font-size: 0.8rem;">VIEW DETAILS</button>
+                    <div style="display: flex; gap: 1rem;">
+                        <button class="cta-button glow-blue" style="padding: 0.65rem 1.25rem; font-size: 0.8rem;" onclick="simulateOptimization()">REROUTE NOW</button>
+                        <button class="cta-button" style="background: transparent; border: 1px solid var(--border); padding: 0.65rem 1.25rem; font-size: 0.8rem;">DISMISS</button>
+                    </div>
                 </div>
 
-                <div class="glass" style="padding: 1.5rem; margin-bottom: 1rem; border-left: 6px solid var(--accent-blue); display: flex; justify-content: space-between; align-items: center;">
+                <!-- Info Alert -->
+                <div class="glass" style="padding: 1.5rem; margin-bottom: 1rem; border-left: 6px solid var(--accent-blue); display: flex; justify-content: space-between; align-items: center; background: rgba(56, 189, 248, 0.02);">
                     <div>
-                        <h4 style="color: var(--accent-blue); margin-bottom: 0.5rem;">INFO: Optimization Ready</h4>
-                        <p style="font-size: 0.9rem; color: var(--text-secondary);">AI has calculated a 12% fuel saving opportunity for the Southeast network.</p>
+                        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+                            <span class="status-pill" style="background: rgba(56, 189, 248, 0.1); color: var(--accent-blue); font-weight: 700;">AI INSIGHT</span>
+                            <h4 style="color: var(--text-primary); margin: 0;">Optimization Opportunity</h4>
+                        </div>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary);">12% fuel saving opportunity identified for the Southeast network.</p>
                     </div>
-                    <button class="cta-button" style="background: var(--accent-blue); color: black; padding: 0.5rem 1rem; font-size: 0.8rem;">APPLY ALL</button>
+                    <button class="cta-button" style="background: var(--accent-blue); color: black; padding: 0.65rem 1.25rem; font-size: 0.8rem; font-weight: 700;" onclick="simulateOptimization()">APPLY ALL</button>
                 </div>
             </div>
         </div>
