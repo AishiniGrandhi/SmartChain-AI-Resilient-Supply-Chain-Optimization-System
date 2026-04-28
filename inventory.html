@@ -3,95 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventory | SmartChain AI</title>
+    <title>SmartChain AI | Inventory</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div id="sidebar-container" data-active="inventory"></div>
+    <!-- Sidebar injected by components.js -->
 
-    <main class="main-content">
-        <div id="header-container" data-title="Inventory Management"></div>
+    <main class="app-layout">
+        <div class="main-content">
+            <header class="page-header fade-in">
+                <div>
+                    <h1 class="page-title">Smart Inventory Control</h1>
+                    <p class="page-subtitle">AI-driven predictive stock management.</p>
+                </div>
+            </header>
 
-        <div class="section-box glass animate-fade-in">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-                <h3>Stock Overview</h3>
-                <div style="display: flex; gap: 1rem;">
-                    <input type="text" placeholder="Search inventory..." style="background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 0.5rem 1rem; border-radius: 8px; color: white;">
-                    <button class="cta-button" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">+ Add Item</button>
+            <div class="dashboard-layout fade-in" style="animation-delay: 0.1s;">
+                <div class="glass panel">
+                    <h3 class="panel-title"><i class="fas fa-boxes"></i> Warehouse Stock Distribution</h3>
+                    <div class="chart-container">
+                        <canvas id="inventory-chart"></canvas>
+                    </div>
+                </div>
+
+                <div class="glass panel">
+                    <h3 class="panel-title"><i class="fas fa-robot"></i> AI Replenishment Suggestions</h3>
+                    <div class="alerts-list">
+                        <div class="alert-item warning">
+                            <div class="alert-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                            <div class="alert-content">
+                                <h4>Semiconductors (SKU-992)</h4>
+                                <p>AI predicts a shortage in 4 days due to supply chain delays.</p>
+                                <strong style="color: var(--accent-blue); display: block; margin-top: 0.5rem;"><i class="fas fa-lightbulb"></i> Suggestion: Increase stock by 30% from alternate supplier.</strong>
+                            </div>
+                        </div>
+                        <div class="alert-item">
+                            <div class="alert-icon" style="color: var(--success);"><i class="fas fa-check-circle"></i></div>
+                            <div class="alert-content">
+                                <h4>Packaging Materials (SKU-104)</h4>
+                                <p>Stock levels are optimal based on forecasted demand.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Item ID</th>
-                        <th>Name</th>
-                        <th>Location</th>
-                        <th>Stock Level</th>
-                        <th>Status</th>
-                        <th>Last Updated</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>#INV-9021</td>
-                        <td>Precision Sensors</td>
-                        <td>Warehouse A (Dallas)</td>
-                        <td>450 units</td>
-                        <td><span style="color: var(--success);">● Optimum</span></td>
-                        <td>2 hours ago</td>
-                    </tr>
-                    <tr>
-                        <td>#INV-8842</td>
-                        <td>Micro-Processors</td>
-                        <td>Warehouse B (Singapore)</td>
-                        <td>120 units</td>
-                        <td><span style="color: var(--warning);">● Low Stock</span></td>
-                        <td>4 hours ago</td>
-                    </tr>
-                    <tr>
-                        <td>#INV-7731</td>
-                        <td>Lithium Cells</td>
-                        <td>Warehouse C (Berlin)</td>
-                        <td>2,400 units</td>
-                        <td><span style="color: var(--success);">● Optimum</span></td>
-                        <td>1 day ago</td>
-                    </tr>
-                    <tr>
-                        <td>#INV-6612</td>
-                        <td>Thermal Paste</td>
-                        <td>Warehouse A (Dallas)</td>
-                        <td>15 units</td>
-                        <td><span style="color: var(--danger);">● Critical</span></td>
-                        <td>12 mins ago</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+            <div class="glass panel fade-in" style="animation-delay: 0.2s;">
+                <h3 class="panel-title" style="margin-bottom: 1.5rem;"><i class="fas fa-list"></i> Real-time Stock Levels</h3>
+                <div class="inventory-grid">
+                    <div class="inventory-item">
+                        <div class="item-info">
+                            <h4>Engine Components</h4>
+                            <p>Warehouse A</p>
+                        </div>
+                        <div class="item-stock">2,450</div>
+                    </div>
+                    
+                    <div class="inventory-item low-stock">
+                        <div class="item-info">
+                            <h4>Semiconductors</h4>
+                            <p>Warehouse B</p>
+                        </div>
+                        <div class="item-stock">124</div>
+                    </div>
+                    
+                    <div class="inventory-item">
+                        <div class="item-info">
+                            <h4>Steel Panels</h4>
+                            <p>In Transit</p>
+                        </div>
+                        <div class="item-stock">850</div>
+                    </div>
 
-        <div class="sections-grid" style="margin-top: 1.5rem;">
-             <div class="section-box glass animate-fade-in" style="height: auto;">
-                <h3>AI Inventory Insights</h3>
-                <div style="padding: 1rem; background: rgba(56, 189, 248, 0.05); border-left: 4px solid var(--accent-blue); border-radius: 4px; margin-bottom: 1rem;">
-                    <p style="font-weight: 600; color: var(--accent-blue);">Critical Stock Alert: Thermal Paste</p>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary);">Stock in Dallas warehouse has dropped below safety margin (20 units). Current consumption trends suggest depletion in 48 hours.</p>
+                    <div class="inventory-item low-stock">
+                        <div class="item-info">
+                            <h4>Lithium Batteries</h4>
+                            <p>Regional Hub</p>
+                        </div>
+                        <div class="item-stock">89</div>
+                    </div>
                 </div>
-                <div style="padding: 1rem; background: rgba(129, 140, 248, 0.05); border-left: 4px solid var(--accent-purple); border-radius: 4px;">
-                    <p style="font-weight: 600; color: var(--accent-purple);">Replenishment Optimization</p>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary);">Suggested order of 500 units for Micro-Processors to capitalize on volume discounts available until Friday.</p>
-                </div>
-             </div>
-             <div class="section-box glass animate-fade-in" style="height: auto;">
-                <h3>Predictive Demand</h3>
-                <canvas id="inventory-chart" style="max-height: 200px;"></canvas>
-             </div>
+            </div>
         </div>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="auth.js"></script>
     <script src="components.js"></script>
     <script src="script.js"></script>
 </body>
-</html>
+</html>

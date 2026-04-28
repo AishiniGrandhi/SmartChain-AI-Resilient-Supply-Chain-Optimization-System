@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Hub | SmartChain AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="sidebar-container" data-active="ai"></div>
+
+    <main class="main-content">
+        <div id="header-container" data-title="AI Strategic Hub"></div>
+
+        <div class="sections-grid" style="grid-template-columns: 1fr 2fr;">
+            <div class="section-box glass animate-fade-in" style="height: auto;">
+                <h3>Strategy Engine</h3>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 2rem;">
+                    Our Gemini-powered strategic engine analyzes global supply patterns, weather data, and market trends to provide real-time optimizations.
+                </p>
+                
+                <h4 style="color: var(--text-secondary); margin-bottom: 1rem;">Core Capabilities</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+                        <i class="fas fa-check-circle" style="color: var(--success);"></i>
+                        <span>Predictive Rerouting</span>
+                    </li>
+                    <li style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+                        <i class="fas fa-check-circle" style="color: var(--success);"></i>
+                        <span>Stock Leakage Detection</span>
+                    </li>
+                    <li style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+                        <i class="fas fa-check-circle" style="color: var(--success);"></i>
+                        <span>Demand Anomaly Detection</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="section-box glass animate-fade-in" style="height: 600px; animation-delay: 0.2s;">
+                <h3>AI Assistant Interface</h3>
+                <div class="chat-container">
+                    <div class="chat-messages" id="chat">
+                        <div class="message ai">Strategic Hub Online. How can I assist with your supply chain operations today? You can ask about route optimization, stock predictions, or risk analysis.</div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="userInput" placeholder="Analyze current risk in Asian routes...">
+                        <button onclick="getAI()"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="components.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

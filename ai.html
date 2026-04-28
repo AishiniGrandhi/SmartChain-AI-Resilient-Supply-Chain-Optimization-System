@@ -3,57 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Hub | SmartChain AI</title>
+    <title>SmartChain AI | Decision Engine</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div id="sidebar-container" data-active="ai"></div>
+    <!-- Sidebar injected by components.js -->
 
-    <main class="main-content">
-        <div id="header-container" data-title="AI Strategic Hub"></div>
+    <main class="app-layout">
+        <div class="main-content">
+            <header class="page-header fade-in">
+                <div>
+                    <h1 class="page-title">AI Decision Engine</h1>
+                    <p class="page-subtitle">Ask questions about your supply chain network and get actionable insights.</p>
+                </div>
+            </header>
 
-        <div class="sections-grid" style="grid-template-columns: 1fr 2fr;">
-            <div class="section-box glass animate-fade-in" style="height: auto;">
-                <h3>Strategy Engine</h3>
-                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 2rem;">
-                    Our Gemini-powered strategic engine analyzes global supply patterns, weather data, and market trends to provide real-time optimizations.
-                </p>
+            <div class="glass panel fade-in" style="animation-delay: 0.1s; max-width: 800px; margin: 0 auto; width: 100%;">
                 
-                <h4 style="color: var(--text-secondary); margin-bottom: 1rem;">Core Capabilities</h4>
-                <ul style="list-style: none; padding: 0;">
-                    <li style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
-                        <i class="fas fa-check-circle" style="color: var(--success);"></i>
-                        <span>Predictive Rerouting</span>
-                    </li>
-                    <li style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
-                        <i class="fas fa-check-circle" style="color: var(--success);"></i>
-                        <span>Stock Leakage Detection</span>
-                    </li>
-                    <li style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
-                        <i class="fas fa-check-circle" style="color: var(--success);"></i>
-                        <span>Demand Anomaly Detection</span>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="section-box glass animate-fade-in" style="height: 600px; animation-delay: 0.2s;">
-                <h3>AI Assistant Interface</h3>
-                <div class="chat-container">
-                    <div class="chat-messages" id="chat">
-                        <div class="message ai">Strategic Hub Online. How can I assist with your supply chain operations today? You can ask about route optimization, stock predictions, or risk analysis.</div>
+                <div class="chat-window" style="height: 500px;">
+                    <div class="chat-messages" id="ai-chat-messages">
+                        <div class="message ai">
+                            Hello! I'm your SmartChain AI Consultant. I have loaded your transport context. What supply chain issues can I help you resolve today?
+                        </div>
                     </div>
-                    <div class="chat-input">
-                        <input type="text" id="userInput" placeholder="Analyze current risk in Asian routes...">
-                        <button onclick="getAI()"><i class="fas fa-paper-plane"></i></button>
+                    
+                    <div class="chat-input-area">
+                        <input type="text" id="ai-input" class="chat-input" placeholder="e.g. How should we handle the delay on route 66?">
+                        <button class="chat-btn" onclick="askAI()">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
                     </div>
                 </div>
+
+                <div style="margin-top: 1rem; text-align: center; color: var(--text-secondary); font-size: 0.85rem;">
+                    Powered by Google Gemini API
+                </div>
+
             </div>
         </div>
     </main>
 
+    <script src="auth.js"></script>
     <script src="components.js"></script>
     <script src="script.js"></script>
+    <script>
+        document.getElementById('ai-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                askAI();
+            }
+        });
+    </script>
 </body>
 </html>

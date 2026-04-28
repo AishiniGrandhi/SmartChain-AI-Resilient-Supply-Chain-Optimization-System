@@ -1,71 +1,61 @@
-const Components = {
-    sidebar: (activePage) => `
-        <div class="sidebar">
-            <div class="brand">
-                <i class="fas fa-network-wired"></i>
-                <span>SmartChain AI</span>
-            </div>
-            <nav>
-                <ul>
-                    <li class="${activePage === 'dashboard' ? 'active' : ''}" onclick="window.location.href='dashboard.html'">
-                        <i class="fas fa-th-large"></i>
-                        <span>Dashboard</span>
-                    </li>
-                    <li class="${activePage === 'inventory' ? 'active' : ''}" onclick="window.location.href='inventory.html'">
-                        <i class="fas fa-boxes"></i>
-                        <span>Inventory</span>
-                    </li>
-                    <li class="${activePage === 'routes' ? 'active' : ''}" onclick="window.location.href='routes.html'">
-                        <i class="fas fa-route"></i>
-                        <span>Route Optimizer</span>
-                    </li>
-                    <li class="${activePage === 'ai' ? 'active' : ''}" onclick="window.location.href='ai.html'">
-                        <i class="fas fa-robot"></i>
-                        <span>AI Hub</span>
-                    </li>
-                    <li class="${activePage === 'alerts' ? 'active' : ''}" onclick="window.location.href='alerts.html'">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <span>Alert Center</span>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    `,
-    header: (title) => `
-        <header>
-            <h1>${title}</h1>
-            <div class="user-profile">
-                <div class="notifications">
-                    <i class="fas fa-bell"></i>
-                </div>
-                <span>Supply Manager</span>
-                <div class="avatar"></div>
-            </div>
-        </header>
-    `,
-    kpiCard: (label, value, trend, isUp) => `
-        <div class="kpi-card glass animate-fade-in">
-            <span class="label">${label}</span>
-            <span class="value">${value}</span>
-            <span class="trend ${isUp ? 'up' : 'down'}">
-                <i class="fas fa-caret-${isUp ? 'up' : 'down'}"></i> ${trend}
-            </span>
-        </div>
-    `
-};
+// components.js
+function renderSidebar() {
+    const user = typeof getUser === 'function' ? getUser() : JSON.parse(localStorage.getItem('smartchain_user') || '{}');
+    if (!user || !user.email) return;
 
-// Auto-inject components if they exist in the DOM
-document.addEventListener('DOMContentLoaded', () => {
-    const sidebarContainer = document.getElementById('sidebar-container');
-    const headerContainer = document.getElementById('header-container');
+    const currentPath = window.location.pathname.split('/').pop() || 'dashboard.html';
     
-    if (sidebarContainer) {
-        const active = sidebarContainer.dataset.active;
-        sidebarContainer.innerHTML = Components.sidebar(active);
-    }
-    
-    if (headerContainer) {
-        const title = headerContainer.dataset.title;
-        headerContainer.innerHTML = Components.header(title);
-    }
-});
+    const sidebarHTML = `
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2 class="text-gradient" style="font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fas fa-network-wired"></i> SmartChain
+            </h2>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item ${currentPath === 'dashboard.html' ? 'active' : ''}">
+                <i class="fas fa-chart-pie"></i> Dashboard
+            </a>
+            ${(user.role === 'Admin' || user.role === 'Logistics Manager') ? `
+            <a href="inventory.html" class="nav-item ${currentPath === 'inventory.html' ? 'active' : ''}">
+                <i class="fas fa-boxes-stacked"></i> Inventory
+            </a>
+            ` : ''}
+            <a href="routes.html" class="nav-item ${currentPath === 'routes.html' ? 'active' : ''}">
+                <i class="fas fa-route"></i> Route Optimization
+            </a>
+            ${(user.role === 'Admin' || user.role === 'Logistics Manager') ? `
+            <a href="alerts.html" class="nav-item ${currentPath === 'alerts.html' ? 'active' : ''}">
+                <i class="fas fa-bell"></i> Alerts & Risks
+            </a>
+            ` : ''}
+            <a href="tracking.html" class="nav-item ${currentPath === 'tracking.html' ? 'active' : ''}">
+                <i class="fas fa-location-crosshairs"></i> Order Tracking
+            </a>
+            ${(user.role === 'Admin' || user.role === 'Logistics Manager') ? `
+            <a href="ai.html" class="nav-item ${currentPath === 'ai.html' ? 'active' : ''}">
+                <i class="fas fa-brain"></i> AI Decision Engine
+            </a>
+            ` : ''}
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-avatar">${user.email.charAt(0).toUpperCase()}</div>
+                <div class="user-details">
+                    <span class="user-name">${user.role}</span>
+                    <span class="user-role">${user.transportType} Sector</span>
+                </div>
+            </div>
+            <button class="btn logout-btn" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </aside>
+    `;
+
+    document.body.insertAdjacentHTML('afterbegin', sidebarHTML);
+}
+
+document.addEventListener('DOMContentLoaded', renderSidebar);

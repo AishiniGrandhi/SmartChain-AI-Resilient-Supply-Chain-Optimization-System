@@ -3,55 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartChain AI | Intelligent Supply Chain Control</title>
+    <title>SmartChain AI | Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="hero">
-        <h1 class="animate-fade-in">SmartChain AI</h1>
-        <p class="animate-fade-in" style="animation-delay: 0.2s;">
-            The next-generation Intelligent Supply Chain Control Tower. Predict disruptions, optimize logistics, and automate decision-making with enterprise-grade AI.
-        </p>
-        <div class="animate-fade-in" style="animation-delay: 0.4s;">
-            <button class="cta-button glow-blue" onclick="window.location.href='dashboard.html'">
-                Launch Control Tower <i class="fas fa-arrow-right" style="margin-left: 0.5rem;"></i>
-            </button>
+    <div class="login-container">
+        <div class="glass login-card fade-in">
+            <div class="login-header">
+                <div style="font-size: 3rem; color: var(--accent-blue); margin-bottom: 1rem;">
+                    <i class="fas fa-network-wired"></i>
+                </div>
+                <h1 class="text-gradient">SmartChain AI</h1>
+                <p>Intelligent Supply Chain Control Tower</p>
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control" placeholder="admin@smartchain.ai" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="role">Role</label>
+                    <select id="role" class="form-control" required>
+                        <option value="Admin">Admin</option>
+                        <option value="Logistics Manager">Logistics Manager</option>
+                        <option value="Driver">Driver</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="transportType">Primary Transport Type</label>
+                    <select id="transportType" class="form-control" required>
+                        <option value="Railways">🚆 Railways (Fixed Routes, Scheduling)</option>
+                        <option value="Airways">✈️ Airways (Fastest, Time Optimization)</option>
+                        <option value="Roadways">🚌 Roadways (Flexible, Alternate Paths)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="apiKey">Gemini API Key (Required for AI)</label>
+                    <input type="password" id="apiKey" class="form-control" placeholder="AIzaSy..." required>
+                </div>
+
+                <button type="submit" class="btn glow-blue" style="margin-top: 1rem; width: 100%;">
+                    Access Control Tower <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
         </div>
     </div>
 
-    <section style="padding: 5rem 2.5rem; background: rgba(255,255,255,0.02);">
-        <h2 style="text-align: center; margin-bottom: 4rem; font-size: 2.5rem;">Enterprise Challenges, Solved.</h2>
-        <div class="dashboard-grid">
-            <div class="glass kpi-card" style="height: 250px; justify-content: center; align-items: center; text-align: center;">
-                <i class="fas fa-clock-rotate-left" style="font-size: 2.5rem; color: var(--accent-blue); margin-bottom: 1rem;"></i>
-                <h3>Eliminate Delays</h3>
-                <p style="color: var(--text-secondary); font-size: 0.9rem;">Real-time tracking and predictive bottleneck analysis.</p>
-            </div>
-            <div class="glass kpi-card" style="height: 250px; justify-content: center; align-items: center; text-align: center;">
-                <i class="fas fa-chart-line" style="font-size: 2.5rem; color: var(--accent-purple); margin-bottom: 1rem;"></i>
-                <h3>Demand Forecasting</h3>
-                <p style="color: var(--text-secondary); font-size: 0.9rem;">AI-driven insights to align inventory with market trends.</p>
-            </div>
-            <div class="glass kpi-card" style="height: 250px; justify-content: center; align-items: center; text-align: center;">
-                <i class="fas fa-map-location-dot" style="font-size: 2.5rem; color: var(--success); margin-bottom: 1rem;"></i>
-                <h3>Route Optimization</h3>
-                <p style="color: var(--text-secondary); font-size: 0.9rem;">Dynamic route planning to reduce costs and carbon footprint.</p>
-            </div>
-            <div class="glass kpi-card" style="height: 250px; justify-content: center; align-items: center; text-align: center;">
-                <i class="fas fa-shield-halved" style="font-size: 2.5rem; color: var(--danger); margin-bottom: 1rem;"></i>
-                <h3>Risk Mitigation</h3>
-                <p style="color: var(--text-secondary); font-size: 0.9rem;">Automated alerts for supply chain disruptions.</p>
-            </div>
-        </div>
-    </section>
+    <script src="auth.js"></script>
+    <script>
+        // If already logged in, redirect to dashboard
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = JSON.parse(localStorage.getItem('smartchain_user'));
+            if (user && user.email) {
+                window.location.href = 'dashboard.html';
+            }
+        });
 
-    <footer style="text-align: center; padding: 3rem; color: var(--text-secondary); font-size: 0.875rem;">
-        &copy; 2026 SmartChain AI. All rights reserved. Built for global efficiency.
-    </footer>
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const role = document.getElementById('role').value;
+            const transportType = document.getElementById('transportType').value;
+            const apiKey = document.getElementById('apiKey').value;
 
-    <script src="components.js"></script>
-    <script src="script.js"></script>
+            if (email && password && apiKey) {
+                const userData = {
+                    email,
+                    role,
+                    transportType,
+                    apiKey
+                };
+                localStorage.setItem('smartchain_user', JSON.stringify(userData));
+                window.location.href = 'dashboard.html';
+            }
+        });
+    </script>
 </body>
-</html>
+</html>

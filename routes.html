@@ -3,66 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Route Optimizer | SmartChain AI</title>
+    <title>SmartChain AI | Route Optimization</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div id="sidebar-container" data-active="routes"></div>
+    <!-- Sidebar injected by components.js -->
 
-    <main class="main-content">
-        <div id="header-container" data-title="Route Optimizer"></div>
-
-        <div class="sections-grid">
-            <div class="section-box glass animate-fade-in" style="height: 600px;">
-                <h3>
-                    <span>Dynamic Network Map</span>
-                    <i class="fas fa-satellite" style="color: var(--accent-blue);"></i>
-                </h3>
-                <div id="map-container">
-                    <div id="map" style="height: 100%;"></div>
+    <main class="app-layout">
+        <div class="main-content">
+            <header class="page-header fade-in">
+                <div>
+                    <h1 class="page-title">Dynamic Route Optimization</h1>
+                    <p class="page-subtitle">AI-calculated shortest paths and alternate routing.</p>
                 </div>
-            </div>
-            <div class="section-box glass animate-fade-in" style="height: 600px; animation-delay: 0.2s;">
-                <h3>
-                    <span>Optimization Engine</span>
-                    <i class="fas fa-microchip" style="color: var(--accent-purple);"></i>
-                </h3>
-                
-                <div style="margin-bottom: 2rem;">
-                    <h4 style="color: var(--text-secondary); margin-bottom: 1rem;">Active Shipments</h4>
-                    <div class="glass" style="padding: 1rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-blue);">
-                        <p style="font-weight: 600;">Shipment #TX-442</p>
-                        <p style="font-size: 0.8rem; color: var(--text-secondary);">Dallas → Chicago</p>
-                        <div style="margin-top: 0.5rem; display: flex; justify-content: space-between; align-items: center;">
-                            <span style="font-size: 0.75rem; background: rgba(56,189,248,0.1); color: var(--accent-blue); padding: 2px 8px; border-radius: 4px;">ON TIME</span>
-                            <span style="font-size: 0.75rem; color: var(--text-secondary);">420 km left</span>
-                        </div>
-                    </div>
-                    <div class="glass" style="padding: 1rem; margin-bottom: 1rem; border-left: 4px solid var(--warning);">
-                        <p style="font-weight: 600;">Shipment #NY-118</p>
-                        <p style="font-size: 0.8rem; color: var(--text-secondary);">New York → Berlin</p>
-                        <div style="margin-top: 0.5rem; display: flex; justify-content: space-between; align-items: center;">
-                            <span style="font-size: 0.75rem; background: rgba(250,204,21,0.1); color: var(--warning); padding: 2px 8px; border-radius: 4px;">WEATHER DELAY</span>
-                            <span style="font-size: 0.75rem; color: var(--text-secondary);">In Transit</span>
-                        </div>
-                    </div>
+            </header>
+
+            <div class="dashboard-layout fade-in" style="animation-delay: 0.1s;">
+                <div class="glass panel" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+                    <div id="full-map" style="flex: 1; width: 100%; min-height: 500px;"></div>
                 </div>
 
-                <div style="margin-top: 2rem;">
-                    <h4 style="color: var(--text-secondary); margin-bottom: 1rem;">AI Rerouting Suggestions</h4>
-                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
-                        Detected congestion on Route A-12. Rerouting via Highway 45 could save 22 mins and 14L of fuel.
+                <div class="glass panel" style="overflow-y: auto;">
+                    <h3 class="panel-title"><i class="fas fa-route"></i> Active Routes</h3>
+                    
+                    <div class="alerts-list" style="margin-top: 1rem;">
+                        <div class="alert-item" style="border-left-color: var(--accent-blue); background: rgba(56, 189, 248, 0.1);">
+                            <div class="alert-icon" style="color: var(--accent-blue);"><i class="fas fa-location-arrow"></i></div>
+                            <div class="alert-content">
+                                <h4>Main Route (Active)</h4>
+                                <p>Standard path based on historical efficiency data.</p>
+                                <span class="alert-time">ETA: 4h 12m</span>
+                            </div>
+                        </div>
+
+                        <div class="alert-item" style="border-left-color: var(--accent-purple); background: rgba(129, 140, 248, 0.1);">
+                            <div class="alert-icon" style="color: var(--accent-purple);"><i class="fas fa-code-branch"></i></div>
+                            <div class="alert-content">
+                                <h4>AI Alternate Route</h4>
+                                <p>Shortest path logic generated to avoid disruption ahead.</p>
+                                <span class="alert-time">ETA: 3h 45m (Optimal)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="panel-title" style="margin-top: 2rem;"><i class="fas fa-robot"></i> Simulation Details</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-top: 0.5rem;">
+                        The AI engine continuously recalculates the shortest path using real-time node weights (traffic, weather, delays). 
+                        The moving vehicle simulates live tracking along the optimized vector.
                     </p>
-                    <button class="cta-button glow-blue" style="width: 100%; padding: 0.75rem;">Apply Optimization</button>
                 </div>
             </div>
         </div>
     </main>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="auth.js"></script>
     <script src="components.js"></script>
     <script src="script.js"></script>
 </body>

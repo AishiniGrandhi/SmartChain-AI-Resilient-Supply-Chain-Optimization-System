@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartChain AI | Order Tracking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Sidebar injected by components.js -->
+
+    <main class="app-layout">
+        <div class="main-content">
+            <header class="page-header fade-in">
+                <div>
+                    <h1 class="page-title">Live Order Tracking</h1>
+                    <p class="page-subtitle">Track specific shipments across the logistics network.</p>
+                </div>
+            </header>
+
+            <div class="glass panel fade-in tracking-container" style="animation-delay: 0.1s;">
+                <div class="search-box">
+                    <input type="text" id="orderId" class="form-control" style="flex: 1; padding: 1rem;" placeholder="Enter Order ID (e.g. SC-10492)">
+                    <button class="btn" onclick="searchOrder()" style="padding: 1rem 2rem;">
+                        <i class="fas fa-search"></i> Track
+                    </button>
+                </div>
+
+                <div id="tracking-result" class="tracking-status">
+                    <i id="status-icon-main" class="fas fa-truck-fast status-icon"></i>
+                    <h2 id="status-text-main" style="margin-bottom: 0.5rem;">In Transit</h2>
+                    <p style="color: var(--text-secondary);">Currently nearing Sector 7 Checkpoint</p>
+
+                    <div class="status-timeline">
+                        <div class="timeline-step completed">
+                            <div class="step-dot"><i class="fas fa-check"></i></div>
+                            <span class="step-label">Dispatched</span>
+                        </div>
+                        
+                        <div class="timeline-step active" id="step-transit">
+                            <div class="step-dot"><i class="fas fa-truck"></i></div>
+                            <span class="step-label">In Transit</span>
+                        </div>
+                        
+                        <div class="timeline-step" id="step-delivered">
+                            <div class="step-dot"><i class="fas fa-home"></i></div>
+                            <span class="step-label">Delivered</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="auth.js"></script>
+    <script src="components.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
